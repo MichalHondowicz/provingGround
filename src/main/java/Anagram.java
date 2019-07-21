@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Anagram {
 
@@ -15,7 +14,7 @@ public class Anagram {
         return diaper;
     }
 
-    private boolean isTheSameCaseInsensaitive(String input) {
+    private boolean isTheSameCaseInsensitive(String input) {
         return getDiaper().toLowerCase().equals(input.toLowerCase());
     }
 
@@ -36,7 +35,7 @@ public class Anagram {
         List<String> anagrams = new ArrayList<>();
 
         for (String s : asList) {
-            if (isAnagram(s) && !isTheSameCaseInsensaitive(s)) {
+            if (isAnagram(s) && !isTheSameCaseInsensitive(s)) {
                 anagrams.add(s);
             }
         }
