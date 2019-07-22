@@ -1,6 +1,6 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Anagram {
 
@@ -14,31 +14,10 @@ public class Anagram {
         return diaper;
     }
 
-    private boolean isTheSameCaseInsensitive(String input) {
-        return getDiaper().toLowerCase().equals(input.toLowerCase());
-    }
+    public List<String> match(List<String> input) {
+        return input.stream().filter(item -> !item.toLowerCase().equals(getDiaper().toLowerCase()))
+                .filter(x -> Arrays.equals(x.toLowerCase().chars().sorted().toArray(), getDiaper().toLowerCase().chars().sorted().toArray()))
+                .collect(Collectors.toList());
 
-    private boolean isAnagram(String s) {
-        char[] diaperNoWhiteSpaces = toCharArrayWithNoWhitespaces(getDiaper());
-        Arrays.sort(diaperNoWhiteSpaces);
-        char[] inputNoWhiteSpaces = toCharArrayWithNoWhitespaces(s);
-        Arrays.sort(inputNoWhiteSpaces);
-        return Arrays.equals(diaperNoWhiteSpaces, inputNoWhiteSpaces);
-    }
-
-    private char[] toCharArrayWithNoWhitespaces(String input) {
-        return input.toLowerCase().replaceAll("\\s", "").toCharArray();
-    }
-
-    public List<String> match(List<String> asList) {
-
-        List<String> anagrams = new ArrayList<>();
-
-        for (String s : asList) {
-            if (isAnagram(s) && !isTheSameCaseInsensitive(s)) {
-                anagrams.add(s);
-            }
-        }
-        return anagrams;
     }
 }
